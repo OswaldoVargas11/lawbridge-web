@@ -11,10 +11,23 @@ index.html            ← la página (todo el HTML, CSS y JS van aquí)
 favicon.svg           ← ícono "LB"
 og-image.png          ← imagen para compartir en redes (Open Graph)
 image-slot.js         ← componente para arrastrar la foto en "Sobre mí"
+blog/
+  index.html          ← índice del blog (filtro por categoría + tiempo de lectura)
+  *.html              ← artículos individuales
+herramientas/
+  prestaciones.html   ← calculadora de prestaciones laborales (Código de Trabajo RD)
 legal/
   privacidad.html     ← Política de Privacidad (Ley 172-13)
   terminos.html       ← Términos de Uso
 ```
+
+> **Blog como subdominio:** cuando tengas dominio propio (`lawbridge.do`), el blog puede
+> servirse como `blog.lawbridge.do` creando un repo aparte con la carpeta `blog/` y un
+> registro DNS CNAME. Mientras estés en GitHub Pages, vive en la ruta `/blog/`.
+
+> **Publicar un artículo nuevo:** duplica cualquier artículo de `blog/`, cambia título,
+> categoría y contenido, y añade su tarjeta en `blog/index.html` (atributo `data-cat`
+> para el filtro). El tiempo de lectura del artículo se calcula solo.
 
 > Las carpetas `project/` y `chats/` son material original del diseño. No se usan en el
 > sitio publicado; puedes borrarlas cuando quieras.

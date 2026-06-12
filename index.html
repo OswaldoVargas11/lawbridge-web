@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Lawbridge — Despacho de Abogados en Santo Domingo</title>
 <meta name="description" content="Despacho boutique de abogados en Santo Domingo, República Dominicana. Civil, inmobiliario, laboral y corporativo. Connecting people. Resolving matters. Building trust.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -240,10 +241,24 @@
   .post {
     background: #FFFFFF; border: 1.5px solid rgba(34,62,91,0.1); border-radius: 14px;
     padding: 26px; display: flex; flex-direction: column; gap: 10px;
+    text-decoration: none; transition: transform 0.18s ease, box-shadow 0.18s ease;
   }
+  .post:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(34,62,91,0.12); }
+  .post:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
   .post-meta { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); }
   .post h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 17.5px; line-height: 1.35; color: var(--deep); margin: 0; }
   .post p { font-size: 15px; line-height: 1.6; color: var(--gray); margin: 0; text-wrap: pretty; }
+  .post-foot { margin-top: auto; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .post-rt { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; color: var(--gray); }
+  .post-read { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.04em; color: var(--teal); }
+  .blog-more { margin-top: 36px; }
+
+  /* herramientas */
+  .tool-strip { background: var(--deep); padding: 64px 0; }
+  .tool-inner { display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .tool-strip .kicker { color: #2DD4BF; margin-bottom: 10px; }
+  .tool-strip h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(22px, 2.6vw, 30px); color: #FFFFFF; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .tool-strip p { font-size: 16px; line-height: 1.6; color: rgba(230,238,241,0.75); margin: 0; max-width: 560px; }
 
   /* FAQ */
   .faq-sec { background: var(--ice); }
@@ -569,29 +584,46 @@
   </div>
 </section>
 
+<!-- ============ HERRAMIENTAS ============ -->
+<section class="tool-strip" id="herramientas">
+  <div class="container tool-inner">
+    <div class="rv">
+      <span class="kicker">Herramientas gratuitas</span>
+      <h2>Calcula tus prestaciones laborales.</h2>
+      <p>Preaviso, cesantía, vacaciones y salario de navidad según el Código de Trabajo dominicano. Estimado al instante, sin registrarte y sin enviar tus datos.</p>
+    </div>
+    <a class="btn btn-primary rv d1" href="herramientas/prestaciones.html">Abrir calculadora</a>
+  </div>
+</section>
+
 <!-- ============ BLOG ============ -->
 <section id="blog">
   <div class="container">
     <span class="kicker rv">Actualidad jurídica</span>
     <h2 class="h2 rv d1">Del blog.</h2>
     <p class="lead rv d2">Guías breves y novedades legales en República Dominicana, explicadas en lenguaje claro.</p>
-    <!-- Replace these placeholder entries with your real articles and link them -->
     <div class="post-grid">
-      <article class="post rv">
+      <a class="post rv" href="blog/comprar-inmueble-documentos.html">
         <span class="post-meta">Inmobiliario · Mayo 2026</span>
         <h3>Comprar un inmueble en RD: los 5 documentos que debes revisar antes de firmar</h3>
         <p>Certificado de título, mensura, cargas y gravámenes… la lista corta que evita los problemas largos.</p>
-      </article>
-      <article class="post rv d1">
+        <span class="post-foot"><span class="post-rt">⏱ 4 min de lectura</span><span class="post-read">Leer artículo →</span></span>
+      </a>
+      <a class="post rv d1" href="blog/prestaciones-laborales.html">
         <span class="post-meta">Laboral · Abril 2026</span>
         <h3>Prestaciones laborales: qué incluyen y cómo se calculan según el Código de Trabajo</h3>
         <p>Preaviso, cesantía y vacaciones: lo que todo empleador y empleado debe tener claro al terminar un contrato.</p>
-      </article>
-      <article class="post rv d2">
+        <span class="post-foot"><span class="post-rt">⏱ 4 min de lectura</span><span class="post-read">Leer artículo →</span></span>
+      </a>
+      <a class="post rv d2" href="blog/divorcio-mutuo-consentimiento.html">
         <span class="post-meta">Familia · Marzo 2026</span>
         <h3>Divorcio por mutuo consentimiento: pasos, plazos y costos en República Dominicana</h3>
         <p>El procedimiento más rápido cuando hay acuerdo, y los puntos que conviene dejar bien redactados.</p>
-      </article>
+        <span class="post-foot"><span class="post-rt">⏱ 4 min de lectura</span><span class="post-read">Leer artículo →</span></span>
+      </a>
+    </div>
+    <div class="blog-more rv">
+      <a class="btn btn-ghost" href="blog/index.html">Visitar el blog — todos los artículos</a>
     </div>
   </div>
 </section>
@@ -650,13 +682,13 @@
     <div class="agenda-grid">
       <!--
         El calendario de Calendly se activa automáticamente al definir tu enlace
-        en la constante CALENDLY_URL del <script> al final de esta página.
+        en la constante CALENDLY_URL del bloque CONFIGURACIÓN, al final de esta página.
         Mientras tanto se muestra el marcador de abajo.
       -->
       <div class="agenda-embed rv" id="agendaEmbed">
         <div class="embed-slot" id="embedPlaceholder" role="note" aria-label="Espacio reservado para el calendario de citas">
           <code>&lt;!-- Calendly --&gt;</code>
-          <p>Pega tu enlace de Calendly en la constante <code>CALENDLY_URL</code> (dentro del &lt;script&gt; de <code>index.html</code>) y aquí aparecerá tu calendario de reservas en vivo.</p>
+          <p>Pega tu enlace de Calendly en la constante <code>CALENDLY_URL</code> (bloque CONFIGURACIÓN de <code>index.html</code>) y aquí aparecerá tu calendario de reservas en vivo.</p>
         </div>
       </div>
       <div class="agenda-info rv d1">
@@ -710,17 +742,17 @@
       <input type="text" name="_gotcha" id="f-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
       <div class="field">
         <span><label for="f-nombre">Nombre</label></span>
-        <input id="f-nombre" name="nombre" type="text" autocomplete="name" required>
+        <input id="f-nombre" name="nombre" type="text" autocomplete="name" maxlength="100" required>
         <em id="e-nombre" hidden>Escribe tu nombre.</em>
       </div>
       <div class="field">
         <span><label for="f-email">Email</label></span>
-        <input id="f-email" name="email" type="email" autocomplete="email" required>
+        <input id="f-email" name="email" type="email" autocomplete="email" maxlength="150" required>
         <em id="e-email" hidden>Escribe un email válido.</em>
       </div>
       <div class="field">
         <span><label for="f-msg">¿En qué podemos ayudarte?</label></span>
-        <textarea id="f-msg" name="mensaje" rows="4" required></textarea>
+        <textarea id="f-msg" name="mensaje" rows="4" maxlength="3000" required></textarea>
         <em id="e-msg" hidden>Cuéntanos brevemente tu caso.</em>
       </div>
       <div class="consent">
@@ -751,7 +783,8 @@
       <nav class="foot-links" aria-label="Legal">
         <a href="legal/privacidad.html">Política de Privacidad</a>
         <a href="legal/terminos.html">Términos de Uso</a>
-        <a href="#blog">Blog</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="herramientas/prestaciones.html">Calculadora de prestaciones</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -959,15 +992,24 @@
   });
 
   /* ---------- Calendly (se activa al configurar CALENDLY_URL) ---------- */
-  if (CALENDLY_URL && CALENDLY_URL.indexOf('TU-USUARIO') === -1) {
+  // Solo se acepta una URL del dominio oficial de Calendly y se construye el
+  // widget vía DOM (setAttribute), nunca concatenando HTML — evita cualquier
+  // inyección si la constante se modifica en el futuro.
+  if (CALENDLY_URL && CALENDLY_URL.indexOf('TU-USUARIO') === -1 &&
+      /^https:\/\/calendly\.com\/[\w\-\/]+$/.test(CALENDLY_URL)) {
     var host = $('agendaEmbed');
     if (host) {
       var css = document.createElement('link');
       css.rel = 'stylesheet';
       css.href = 'https://assets.calendly.com/assets/external/widget.css';
       document.head.appendChild(css);
-      host.innerHTML = '<div class="calendly-inline-widget" data-url="' + CALENDLY_URL +
-        '" style="min-width:320px; height:640px;"></div>';
+      var widget = document.createElement('div');
+      widget.className = 'calendly-inline-widget';
+      widget.setAttribute('data-url', CALENDLY_URL);
+      widget.style.minWidth = '320px';
+      widget.style.height = '640px';
+      host.textContent = '';
+      host.appendChild(widget);
       var s = document.createElement('script');
       s.src = 'https://assets.calendly.com/assets/external/widget.js';
       s.async = true;
