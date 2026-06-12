@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<title>Lawbridge — Asesoría legal y administrativa para empresas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"></link>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"></link>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"></link>
+<style>
+  :root {
+    --lb-deep: #223E5B; --lb-mid: #3D5F7A; --lb-gray: #6D8496;
+    --lb-teal: #0D9488; --lb-ice: #E6EEF1;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: 'Source Sans 3', sans-serif; color: var(--lb-deep); background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  section { scroll-margin-top: 80px; }
+  .lw-container { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .lw-reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .lw-reveal.in { opacity: 1; transform: none; }
+  }
+
+  .lw-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0); transition: background 0.3s ease, box-shadow 0.3s ease; }
+  .lw-nav.scrolled { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(34,62,91,0.08); }
+  .lw-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+  .lw-nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .lw-nav-brand span { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 0.2em; color: var(--lb-deep); }
+  .lw-nav-links { display: flex; gap: 28px; }
+  .lw-nav-links a { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.06em; color: var(--lb-mid); text-decoration: none; transition: color 0.2s; }
+  .lw-nav-links a:hover { color: var(--lb-deep); }
+
+  .lw-btn { display: inline-block; text-decoration: none; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.04em; border: none; border-radius: 8px; padding: 12px 22px; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+  .lw-btn.lg { padding: 15px 30px; font-size: 14px; }
+  .lw-btn-primary { color: #FFFFFF; background: var(--lb-teal); }
+  .lw-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(13,148,136,0.32); }
+  .lw-btn-ghost { background: transparent; color: var(--lb-deep); border: 1.5px solid rgba(34,62,91,0.35); }
+  .lw-btn-ghost:hover { border-color: var(--lb-deep); }
+  .lw-btn-ghost.inv { color: #FFFFFF; border-color: rgba(255,255,255,0.4); }
+  .lw-btn-ghost.inv:hover { border-color: #FFFFFF; }
+
+  .lw-hero { background: var(--lb-ice); position: relative; overflow: hidden; }
+  .lw-hero-inner { position: relative; padding: 170px 32px 150px; }
+  .lw-hero-arcs { position: absolute; inset: auto 0 0 0; width: 100%; height: 78%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .lw-arc { stroke-dasharray: 1; stroke-dashoffset: 1; animation: lwDraw 1.8s ease-out forwards; }
+    .lw-arc.a2 { animation-delay: 0.25s; }
+    .lw-arc.a3 { animation-delay: 0.5s; }
+    @keyframes lwDraw { to { stroke-dashoffset: 0; } }
+  }
+  .lw-hero-kicker { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.22em; color: var(--lb-teal); text-transform: uppercase; }
+  .lw-hero h1 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(32px, 4.6vw, 58px); line-height: 1.14; color: var(--lb-deep); margin: 22px 0 24px; letter-spacing: -0.01em; text-wrap: balance; max-width: 760px; }
+  .lw-hero p { font-size: 19px; line-height: 1.6; color: var(--lb-mid); margin: 0 0 38px; max-width: 560px; text-wrap: pretty; }
+  .lw-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .lw-kicker { display: block; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--lb-teal); margin-bottom: 16px; }
+  .lw-h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.2; color: var(--lb-deep); margin: 0 0 18px; letter-spacing: -0.01em; text-wrap: balance; max-width: 720px; }
+  .lw-lead { font-size: 17.5px; line-height: 1.65; color: var(--lb-gray); margin: 0 0 48px; max-width: 640px; text-wrap: pretty; }
+  .lw-body { font-size: 16.5px; line-height: 1.7; color: var(--lb-mid); margin: 0 0 18px; text-wrap: pretty; }
+
+  .lw-svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .lw-svc-card { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; text-align: left; font-family: inherit; background: #FFFFFF; border: 1.5px solid #DCE5EA; border-radius: 14px; padding: 26px 24px 20px; cursor: pointer; transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+  .lw-svc-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(34,62,91,0.1); }
+  .lw-svc-card.sel { border-color: var(--lb-teal); box-shadow: 0 10px 28px rgba(34,62,91,0.1); }
+  .lw-svc-card .t { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 16.5px; color: var(--lb-deep); }
+  .lw-svc-card .d { font-family: 'Source Sans 3', sans-serif; font-size: 14.5px; line-height: 1.5; color: var(--lb-gray); }
+  .lw-svc-card .m { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--lb-teal); margin-top: 6px; }
+  .lw-svc-card .ic { stroke: var(--lb-gray); }
+  .lw-svc-card.sel .ic { stroke: var(--lb-teal); }
+  .lw-svc-detail { display: flex; gap: 40px; align-items: flex-start; background: var(--lb-ice); border-radius: 14px; padding: 30px 34px; margin-top: 22px; }
+  .lw-svc-detail.fade { animation: lwFade 0.35s ease; }
+  .lw-svc-detail-head { display: flex; flex-direction: column; gap: 6px; min-width: 220px; }
+  .lw-svc-detail-head .t { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 19px; color: var(--lb-deep); }
+  .lw-svc-detail-head .s { font-size: 14.5px; color: var(--lb-gray); }
+  .lw-svc-bullets { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; flex: 1; }
+  .lw-svc-bullets li { display: flex; gap: 10px; font-size: 15px; line-height: 1.5; color: var(--lb-mid); }
+  .lw-svc-bullets svg { flex-shrink: 0; margin-top: 7px; }
+  @keyframes lwFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .lw-steps { display: grid; grid-template-columns: 360px 1fr; gap: 56px; align-items: start; }
+  .lw-steps-rail { position: relative; display: flex; flex-direction: column; gap: 6px; }
+  .lw-steps-line { position: absolute; left: 21px; top: 18px; bottom: 18px; width: 1.5px; background: #CBD8DF; z-index: 0; }
+  .lw-step-tab { position: relative; z-index: 1; display: flex; align-items: center; gap: 16px; background: transparent; border: none; padding: 10px 12px 10px 0; cursor: pointer; border-radius: 10px; text-align: left; font-family: inherit; }
+  .lw-step-n { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid #CBD8DF; background: var(--lb-ice); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: var(--lb-gray); transition: all 0.2s ease; flex-shrink: 0; }
+  .lw-step-tab.on .lw-step-n { background: var(--lb-teal); border-color: var(--lb-teal); color: #FFFFFF; }
+  .lw-step-t { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 15.5px; color: var(--lb-gray); transition: color 0.2s; }
+  .lw-step-tab:hover .lw-step-t, .lw-step-tab.on .lw-step-t { color: var(--lb-deep); }
+  .lw-step-tab.on .lw-step-t { font-weight: 600; }
+  .lw-step-body { background: #FFFFFF; border-radius: 14px; padding: 36px 40px; min-height: 160px; }
+  .lw-step-body.fade { animation: lwFade 0.35s ease; }
+  .lw-step-body h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 22px; color: var(--lb-deep); margin: 0 0 12px; }
+  .lw-step-body p { font-size: 16.5px; line-height: 1.65; color: var(--lb-mid); margin: 0; max-width: 620px; }
+
+  .lw-about { display: grid; grid-template-columns: 400px 1fr; gap: 72px; align-items: center; }
+  .lw-about-photo { position: relative; }
+  .lw-photo-ph { width: 100%; height: 460px; border-radius: 16px; border: 1.5px dashed #B9C9D3; background: repeating-linear-gradient(135deg, #EDF3F6 0 14px, #E4ECF0 14px 28px); display: flex; align-items: center; justify-content: center; }
+  .lw-photo-ph span { font-family: 'Menlo', 'Consolas', monospace; font-size: 12px; color: var(--lb-gray); letter-spacing: 0.04em; text-align: center; padding: 0 24px; }
+  .lw-about-card { position: absolute; left: 20px; bottom: -18px; background: #FFFFFF; border-radius: 12px; padding: 14px 20px; display: flex; flex-direction: column; gap: 3px; box-shadow: 0 12px 32px rgba(34,62,91,0.16); }
+  .lw-about-card .n { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 15px; color: var(--lb-deep); }
+  .lw-about-card .r { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lb-teal); }
+  .lw-about-points { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .lw-about-points li { display: flex; gap: 12px; font-size: 16px; line-height: 1.55; color: var(--lb-deep); }
+  .lw-about-points svg { flex-shrink: 0; margin-top: 7px; }
+
+  .lw-models { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+  .lw-model { display: flex; flex-direction: column; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.14); border-radius: 16px; padding: 30px 28px; transition: transform 0.18s ease; }
+  .lw-model:hover { transform: translateY(-3px); }
+  .lw-model.feat { background: rgba(255,255,255,0.07); border-color: var(--lb-teal); }
+  .lw-model-tag { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lb-gray); }
+  .lw-model.feat .lw-model-tag { color: var(--lb-teal); }
+  .lw-model h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 21px; color: #FFFFFF; margin: 8px 0 10px; }
+  .lw-model > p { font-size: 14.5px; line-height: 1.55; color: #AEC3D2; margin: 0 0 18px; }
+  .lw-model-items { list-style: none; margin: 0 0 26px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .lw-model-items li { display: flex; gap: 10px; align-items: baseline; font-size: 14px; line-height: 1.5; color: #D6E1E8; }
+  .lw-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lb-teal); flex-shrink: 0; position: relative; top: -2px; }
+  .lw-model .lw-btn { margin-top: auto; }
+
+  .lw-faq { display: flex; flex-direction: column; }
+  details.lw-faq-item { border-bottom: 1px solid #DCE5EA; }
+  summary.lw-faq-q { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 16.5px; color: var(--lb-deep); list-style: none; }
+  summary.lw-faq-q::-webkit-details-marker { display: none; }
+  .lw-faq-chev { transition: transform 0.25s ease; flex-shrink: 0; }
+  details[open] .lw-faq-chev { transform: rotate(180deg); }
+  details[open] .lw-faq-chev path { stroke: var(--lb-teal); }
+  .lw-faq-a { margin: 0; padding: 0 4px 24px; font-size: 15.5px; line-height: 1.65; color: var(--lb-mid); }
+
+  .lw-contact { display: grid; grid-template-columns: 1fr 520px; gap: 64px; align-items: start; }
+  .lw-contact-data { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .lw-contact-data > div { display: flex; flex-direction: column; gap: 2px; }
+  .lw-cd-label { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lb-gray); }
+  .lw-cd-value { font-size: 16px; color: var(--lb-deep); }
+  .lw-form-card { background: #FFFFFF; border-radius: 16px; padding: 36px; box-shadow: 0 18px 48px rgba(34,62,91,0.1); }
+  .lw-form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lw-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .lw-field > span { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.06em; color: var(--lb-mid); }
+  .lw-field input, .lw-field textarea { font-family: 'Source Sans 3', sans-serif; font-size: 15px; color: var(--lb-deep); background: #F6F9FA; border: 1.5px solid #DCE5EA; border-radius: 8px; padding: 11px 14px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: vertical; }
+  .lw-field input:focus, .lw-field textarea:focus { border-color: var(--lb-mid); box-shadow: 0 0 0 3px rgba(61,95,122,0.12); background: #FFFFFF; }
+  .lw-field input.err, .lw-field textarea.err { border-color: #C2554F; }
+  .lw-field em { font-style: normal; font-size: 12.5px; color: #C2554F; display: none; }
+  .lw-field.bad em { display: block; }
+  .lw-form-note { font-size: 12px; color: var(--lb-gray); margin: 12px 0 0; text-align: center; }
+  .lw-form-ok { text-align: center; padding: 28px 12px; display: none; }
+  .lw-form-ok h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 21px; color: var(--lb-deep); margin: 18px 0 8px; }
+  .lw-form-ok p { font-size: 15.5px; color: var(--lb-mid); line-height: 1.6; margin: 0; }
+  .lw-form-card.sent form { display: none; }
+  .lw-form-card.sent .lw-form-ok { display: block; animation: lwFade 0.35s ease; }
+
+  .lw-footer { background: var(--lb-deep); padding: 64px 0 40px; }
+  .lw-footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; }
+  .lw-footer-brand { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+  .lw-footer-logo { display: flex; align-items: center; gap: 14px; }
+  .lw-footer-logo span { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 17px; letter-spacing: 0.22em; color: #FFFFFF; }
+  .lw-footer-tag { font-size: 13px; letter-spacing: 0.06em; color: var(--lb-gray); }
+  .lw-footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .lw-footer-links a { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12.5px; letter-spacing: 0.06em; color: #AEC3D2; text-decoration: none; }
+  .lw-footer-links a:hover { color: #FFFFFF; }
+  .lw-footer-bottom { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 44px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); font-size: 12.5px; color: var(--lb-gray); }
+
+  @media (max-width: 980px) {
+    .lw-nav-links { display: none; }
+    .lw-svc-grid { grid-template-columns: 1fr 1fr; }
+    .lw-steps { grid-template-columns: 1fr; gap: 28px; }
+    .lw-about { grid-template-columns: 1fr; gap: 56px; }
+    .lw-models { grid-template-columns: 1fr; }
+    .lw-contact { grid-template-columns: 1fr; }
+    .lw-svc-detail { flex-direction: column; gap: 18px; }
+    .lw-svc-bullets { grid-template-columns: 1fr; }
+    .lw-hero-inner { padding: 140px 32px 120px; }
+  }
+  @media (max-width: 620px) {
+    .lw-svc-grid { grid-template-columns: 1fr; }
+    .lw-form-row2 { grid-template-columns: 1fr; }
+    .lw-container { padding: 0 20px; }
+    .lw-hero-inner { padding: 124px 20px 100px; }
+    .lw-form-card { padding: 26px 20px; }
+    .lw-step-body { padding: 26px 24px; }
+  }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#223E5B">
+  <svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+    <rect width="240" height="240" fill="#223E5B"></rect>
+    <path d="M75 110 Q120 72 165 110" stroke="#0D9488" stroke-width="6" stroke-linecap="round" fill="none"></path>
+    <text x="120" y="158" text-anchor="middle" font-family="Montserrat, Helvetica, sans-serif" font-weight="600" font-size="44" letter-spacing="3" fill="#E6EEF1">LB</text>
+  </svg>
+</template>
+
+<header class="lw-nav" id="lwNav">
+  <div class="lw-container lw-nav-inner">
+    <a class="lw-nav-brand" href="#inicio" aria-label="Lawbridge — inicio">
+      <svg width="52" height="26" viewBox="0 0 72 36" fill="none" aria-hidden="true">
+        <line x1="4" y1="28" x2="68" y2="28" stroke="#223E5B" stroke-width="2.4" stroke-linecap="round"></line>
+        <path d="M8 28 Q36 2 64 28" stroke="#0D9488" stroke-width="2.4" stroke-linecap="round" fill="none"></path>
+        <line x1="22" y1="18.3" x2="22" y2="28" stroke="#223E5B" stroke-width="1.7" stroke-linecap="round"></line>
+        <line x1="29" y1="15.8" x2="29" y2="28" stroke="#223E5B" stroke-width="1.7" stroke-linecap="round"></line>
+        <line x1="36" y1="15" x2="36" y2="28" stroke="#223E5B" stroke-width="1.7" stroke-linecap="round"></line>
+        <line x1="43" y1="15.8" x2="43" y2="28" stroke="#223E5B" stroke-width="1.7" stroke-linecap="round"></line>
+        <line x1="50" y1="18.3" x2="50" y2="28" stroke="#223E5B" stroke-width="1.7" stroke-linecap="round"></line>
+      </svg>
+      <span>LAWBRIDGE</span>
+    </a>
+    <nav class="lw-nav-links" aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#metodo">Método</a>
+      <a href="#despacho">La firma</a>
+      <a href="#colaboracion">Colaboración</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="lw-btn lw-btn-primary" href="#contacto">Agendar consulta</a>
+  </div>
+</header>
+
+<main>
+<section class="lw-hero" id="inicio">
+  <svg class="lw-hero-arcs" viewBox="0 0 1440 560" fill="none" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path pathLength="1" class="lw-arc a1" d="M-80 600 Q720 80 1520 600" stroke="#0D9488" stroke-width="2" fill="none" opacity="0.55"></path>
+    <path pathLength="1" class="lw-arc a2" d="M-80 660 Q720 160 1520 660" stroke="#6D8496" stroke-width="1.4" fill="none" opacity="0.4"></path>
+    <path pathLength="1" class="lw-arc a3" d="M-80 720 Q720 240 1520 720" stroke="#6D8496" stroke-width="1" fill="none" opacity="0.3"></path>
+  </svg>
+  <div class="lw-container lw-hero-inner">
+    <span class="lw-hero-kicker">Firma boutique · Asesoría corporativa</span>
+    <h1>El puente entre su empresa y la tranquilidad jurídica</h1>
+    <p>Asesoría legal y administrativa integral para empresas: societario, contratos, compliance y trámites — con trato directo y honorarios cerrados. Sin litigios, sin sorpresas.</p>
+    <div class="lw-hero-ctas">
+      <a class="lw-btn lw-btn-primary lg" href="#contacto">Agendar una consulta</a>
+      <a class="lw-btn lw-btn-ghost lg" href="#servicios">Ver servicios</a>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" style="background:#FFFFFF; padding:110px 0;">
+  <div class="lw-container">
+    <span class="lw-kicker">Servicios</span>
+    <h2 class="lw-h2">Todo lo administrativo y legal de su empresa, en una sola mesa</h2>
+    <p class="lw-lead">Acompañamiento continuo en las tareas jurídicas del día a día. No llevamos litigios: si un asunto debe ir a juicio, lo referimos a litigantes de confianza y seguimos a su lado coordinando.</p>
+    <div class="lw-svc-grid" id="svcGrid">
+      <button class="lw-svc-card sel" data-svc="societario">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path class="ic" d="M8 26 L8 12 M16 26 L16 8 M24 26 L24 12 M4 26 L28 26" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <span class="t">Vida societaria</span>
+        <span class="d">Constitución, asambleas, actas y secretaría corporativa al día.</span>
+        <span class="m">Ver detalle →</span>
+      </button>
+      <button class="lw-svc-card" data-svc="contratos">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path class="ic" d="M6 6 H22 L26 10 V26 H6 Z M11 14 H21 M11 18 H21 M11 22 H17" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <span class="t">Contratación mercantil</span>
+        <span class="d">Contratos claros que protegen su negocio antes de firmar.</span>
+        <span class="m">Ver detalle →</span>
+      </button>
+      <button class="lw-svc-card" data-svc="compliance">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path class="ic" d="M16 4 L27 9 V16 C27 23 22 27 16 29 C10 27 5 23 5 16 V9 Z M11 16 L15 20 L21 12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <span class="t">Compliance y datos</span>
+        <span class="d">Protección de datos, prevención de lavado y políticas internas.</span>
+        <span class="m">Ver detalle →</span>
+      </button>
+      <button class="lw-svc-card" data-svc="tramites">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path class="ic" d="M6 27 V8 C6 6 7 5 9 5 H23 C25 5 26 6 26 8 V27 M6 27 H26 M11 11 H21 M11 16 H21 M11 21 H16" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <span class="t">Trámites y licencias</span>
+        <span class="d">Permisos, registros y expedientes ante las instituciones públicas.</span>
+        <span class="m">Ver detalle →</span>
+      </button>
+      <button class="lw-svc-card" data-svc="laboral">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path class="ic" d="M16 14 A5 5 0 1 0 16 4 A5 5 0 0 0 16 14 Z M5 28 C5 21 10 18 16 18 C22 18 27 21 27 28" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <span class="t">Asesoría laboral corporativa</span>
+        <span class="d">La cara administrativa del empleo, ordenada y prevista.</span>
+        <span class="m">Ver detalle →</span>
+      </button>
+      <button class="lw-svc-card" data-svc="extrajudicial">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path class="ic" d="M5 24 Q16 10 27 24 M5 24 H27" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+        <span class="t">Resolución extrajudicial</span>
+        <span class="d">Negociación y acuerdo antes de que el conflicto escale.</span>
+        <span class="m">Ver detalle →</span>
+      </button>
+    </div>
+    <div class="lw-svc-detail" id="svcDetail">
+      <div class="lw-svc-detail-head">
+        <span class="t" id="svcTitle">Vida societaria</span>
+        <span class="s">Qué incluye</span>
+      </div>
+      <ul class="lw-svc-bullets" id="svcBullets"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" style="background:#E6EEF1; padding:110px 0;">
+  <div class="lw-container">
+    <span class="lw-kicker">Método</span>
+    <h2 class="lw-h2" style="margin-bottom:48px;">Cuatro pasos, ninguna sorpresa</h2>
+    <div class="lw-steps">
+      <div class="lw-steps-rail" id="stepsRail" role="tablist" aria-label="Pasos del método">
+        <button class="lw-step-tab on" data-step="0" role="tab" aria-selected="true"><span class="lw-step-n">01</span><span class="lw-step-t">Diagnóstico</span></button>
+        <button class="lw-step-tab" data-step="1" role="tab" aria-selected="false"><span class="lw-step-n">02</span><span class="lw-step-t">Propuesta cerrada</span></button>
+        <button class="lw-step-tab" data-step="2" role="tab" aria-selected="false"><span class="lw-step-n">03</span><span class="lw-step-t">Ejecución</span></button>
+        <button class="lw-step-tab" data-step="3" role="tab" aria-selected="false"><span class="lw-step-n">04</span><span class="lw-step-t">Seguimiento</span></button>
+        <div class="lw-steps-line" aria-hidden="true"></div>
+      </div>
+      <div class="lw-step-body" id="stepBody">
+        <h3 id="stepTitle">Diagnóstico</h3>
+        <p id="stepText">Una primera conversación de 30 minutos, sin compromiso, para entender su empresa y el asunto. Salimos de ella con un mapa claro de qué hay que hacer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="despacho" style="background:#FFFFFF; padding:110px 0;">
+  <div class="lw-container lw-about">
+    <div class="lw-about-photo">
+      <div class="lw-photo-ph"><span>retrato profesional<br></br>(sustituir por fotografía)</span></div>
+      <div class="lw-about-card">
+        <span class="n">Alejandra Ríos</span>
+        <span class="r">Abogada · Fundadora</span>
+      </div>
+    </div>
+    <div>
+      <span class="lw-kicker">La firma</span>
+      <h2 class="lw-h2" style="margin-bottom:22px;">Una sola interlocutora, criterio de firma grande</h2>
+      <p class="lw-body">Lawbridge es una firma boutique unipersonal: cada asunto lo lleva, de principio a fin, la misma persona que usted conoce. Esa cercanía no resta rigor — lo concentra.</p>
+      <p class="lw-body">Trabajamos como el departamento jurídico externo de empresas que aún no necesitan uno propio: societario, contratos, cumplimiento y trámites, resueltos con la previsibilidad que exige un negocio.</p>
+      <ul class="lw-about-points">
+        <li><svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 9 Q8 -3 15 9" stroke="#0D9488" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Trato directo: responde siempre la misma abogada</span></li>
+        <li><svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 9 Q8 -3 15 9" stroke="#0D9488" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Honorarios cerrados por escrito, antes de empezar</span></li>
+        <li><svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 9 Q8 -3 15 9" stroke="#0D9488" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Lenguaje claro: documentos que su equipo entiende</span></li>
+        <li><svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 9 Q8 -3 15 9" stroke="#0D9488" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg><span>Red de especialistas para lo que exceda nuestro ámbito</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="colaboracion" style="background:#223E5B; padding:110px 0;">
+  <div class="lw-container">
+    <span class="lw-kicker">Colaboración</span>
+    <h2 class="lw-h2" style="color:#FFFFFF;">Tres maneras de trabajar juntos</h2>
+    <p class="lw-lead" style="color:#AEC3D2;">Honorarios siempre cerrados por adelantado. Solicite una propuesta y la recibirá en 48 horas.</p>
+    <div class="lw-models">
+      <div class="lw-model">
+        <span class="lw-model-tag">Proyecto cerrado</span>
+        <h3>Asunto puntual</h3>
+        <p>Un contrato, una licencia, una constitución. Alcance y precio fijo pactados por adelantado; entrega en fecha.</p>
+        <ul class="lw-model-items">
+          <li><span class="lw-dot"></span><span>Presupuesto cerrado por escrito</span></li>
+          <li><span class="lw-dot"></span><span>Plazo de entrega comprometido</span></li>
+          <li><span class="lw-dot"></span><span>Una ronda de revisión incluida</span></li>
+        </ul>
+        <a class="lw-btn lw-btn-ghost inv" href="#contacto">Pedir propuesta</a>
+      </div>
+      <div class="lw-model feat">
+        <span class="lw-model-tag">El más elegido</span>
+        <h3>Iguala mensual</h3>
+        <p>Asesoría continua para el día a día: consultas, revisión de contratos y avisos de plazos por una cuota mensual fija.</p>
+        <ul class="lw-model-items">
+          <li><span class="lw-dot"></span><span>Consultas ilimitadas por correo</span></li>
+          <li><span class="lw-dot"></span><span>Revisión mensual de contratos</span></li>
+          <li><span class="lw-dot"></span><span>Calendario de obligaciones y plazos</span></li>
+          <li><span class="lw-dot"></span><span>Prioridad de agenda</span></li>
+        </ul>
+        <a class="lw-btn lw-btn-primary" href="#contacto">Pedir propuesta</a>
+      </div>
+      <div class="lw-model">
+        <span class="lw-model-tag">Externalización</span>
+        <h3>Secretaría externa</h3>
+        <p>Nos ocupamos de la vida societaria y administrativa completa: asambleas, libros, registros y cumplimiento periódico.</p>
+        <ul class="lw-model-items">
+          <li><span class="lw-dot"></span><span>Secretaría societaria integral</span></li>
+          <li><span class="lw-dot"></span><span>Cumplimiento y protección de datos al día</span></li>
+          <li><span class="lw-dot"></span><span>Interlocución con las instituciones públicas</span></li>
+        </ul>
+        <a class="lw-btn lw-btn-ghost inv" href="#contacto">Pedir propuesta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#FFFFFF; padding:110px 0;">
+  <div class="lw-container" style="max-width:860px;">
+    <span class="lw-kicker">Preguntas frecuentes</span>
+    <h2 class="lw-h2" style="margin-bottom:36px;">Lo que suelen preguntarnos primero</h2>
+    <div class="lw-faq">
+      <details class="lw-faq-item" open="">
+        <summary class="lw-faq-q"><span>¿Llevan pleitos o juicios?</span><svg class="lw-faq-chev" width="18" height="11" viewBox="0 0 18 11" fill="none" aria-hidden="true"><path d="M1 10 Q9 -4 17 10" stroke="#6D8496" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg></summary>
+        <p class="lw-faq-a">No. Lawbridge trabaja exclusivamente en el plano preventivo y extrajudicial. Si un asunto debe terminar en los tribunales, lo referimos a litigantes de confianza con los que colaboramos habitualmente — y seguimos a su lado coordinando la estrategia.</p>
+      </details>
+      <details class="lw-faq-item">
+        <summary class="lw-faq-q"><span>¿Cómo se calculan los honorarios?</span><svg class="lw-faq-chev" width="18" height="11" viewBox="0 0 18 11" fill="none" aria-hidden="true"><path d="M1 10 Q9 -4 17 10" stroke="#6D8496" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg></summary>
+        <p class="lw-faq-a">Siempre con presupuesto cerrado y por escrito antes de empezar. En los asuntos puntuales, un precio fijo por el proyecto; en la iguala, una cuota mensual pactada. No facturamos por horas abiertas.</p>
+      </details>
+      <details class="lw-faq-item">
+        <summary class="lw-faq-q"><span>¿Trabajan con empresas fuera de Santo Domingo?</span><svg class="lw-faq-chev" width="18" height="11" viewBox="0 0 18 11" fill="none" aria-hidden="true"><path d="M1 10 Q9 -4 17 10" stroke="#6D8496" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg></summary>
+        <p class="lw-faq-a">Sí. La mayor parte del trabajo se realiza de forma remota, con videollamadas y firma electrónica. Las gestiones presenciales ante registros e instituciones públicas se realizan mediante poder de representación.</p>
+      </details>
+      <details class="lw-faq-item">
+        <summary class="lw-faq-q"><span>¿Qué incluye la primera consulta?</span><svg class="lw-faq-chev" width="18" height="11" viewBox="0 0 18 11" fill="none" aria-hidden="true"><path d="M1 10 Q9 -4 17 10" stroke="#6D8496" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg></summary>
+        <p class="lw-faq-a">Treinta minutos de conversación sin compromiso ni costo: entendemos el asunto, le decimos con franqueza si podemos ayudar y, si es el caso, le enviamos una propuesta cerrada en 48 horas.</p>
+      </details>
+      <details class="lw-faq-item">
+        <summary class="lw-faq-q"><span>¿Pueden actuar como nuestro departamento jurídico?</span><svg class="lw-faq-chev" width="18" height="11" viewBox="0 0 18 11" fill="none" aria-hidden="true"><path d="M1 10 Q9 -4 17 10" stroke="#6D8496" stroke-width="1.8" stroke-linecap="round" fill="none"></path></svg></summary>
+        <p class="lw-faq-a">Es exactamente el modelo de la iguala mensual y la secretaría externa: asumimos de forma estable el trabajo jurídico-administrativo de la empresa, con un costo previsible y una única interlocutora.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" style="background:#E6EEF1; padding:110px 0;">
+  <div class="lw-container lw-contact">
+    <div>
+      <span class="lw-kicker">Contacto</span>
+      <h2 class="lw-h2" style="margin-bottom:18px;">Hablemos de su empresa</h2>
+      <p class="lw-body" style="max-width:380px;">Primera consulta de 30 minutos, sin costo ni compromiso. Respondemos en menos de un día laborable.</p>
+      <div class="lw-contact-data">
+        <div><span class="lw-cd-label">Correo</span><span class="lw-cd-value">a.rios@lawbridge.legal</span></div>
+        <div><span class="lw-cd-label">Teléfono</span><span class="lw-cd-value">+1 (809) 555-0000</span></div>
+        <div><span class="lw-cd-label">Oficina</span><span class="lw-cd-value">Av. Winston Churchill 00, Torre Empresarial, Piantini · Santo Domingo</span></div>
+        <div><span class="lw-cd-label">Horario</span><span class="lw-cd-value">L–V · 8:30 a 17:30</span></div>
+      </div>
+    </div>
+    <div class="lw-form-card" id="formCard">
+      <form id="lwForm" novalidate="">
+        <div class="lw-form-row2">
+          <label class="lw-field" id="f-nombre">
+            <span>Nombre</span>
+            <input type="text" name="nombre" placeholder="Su nombre"></input>
+            <em>Indique su nombre</em>
+          </label>
+          <label class="lw-field" id="f-empresa">
+            <span>Empresa</span>
+            <input type="text" name="empresa" placeholder="Nombre de la empresa"></input>
+            <em>Indique su empresa</em>
+          </label>
+        </div>
+        <label class="lw-field" id="f-email">
+          <span>Correo electrónico</span>
+          <input type="email" name="email" placeholder="nombre@empresa.com"></input>
+          <em>Revise el correo electrónico</em>
+        </label>
+        <label class="lw-field" id="f-mensaje">
+          <span>¿En qué podemos ayudar?</span>
+          <textarea rows="4" name="mensaje" placeholder="Cuéntenos brevemente el asunto…"></textarea>
+          <em>Cuéntenos brevemente el asunto (mín. 10 caracteres)</em>
+        </label>
+        <button type="submit" class="lw-btn lw-btn-primary lg" style="width:100%;">Solicitar consulta gratuita</button>
+        <p class="lw-form-note">Sus datos solo se usan para responder a esta consulta.</p>
+      </form>
+      <div class="lw-form-ok">
+        <svg width="56" height="34" viewBox="0 0 56 34" fill="none" aria-hidden="true">
+          <path d="M4 32 Q28 -8 52 32" stroke="#0D9488" stroke-width="2.5" stroke-linecap="round" fill="none"></path>
+          <line x1="4" y1="32" x2="52" y2="32" stroke="#223E5B" stroke-width="2.5" stroke-linecap="round"></line>
+        </svg>
+        <h3>Mensaje recibido</h3>
+        <p id="okText">Gracias. Le escribiremos en menos de un día laborable para agendar la consulta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="lw-footer">
+  <div class="lw-container">
+    <div class="lw-footer-top">
+      <div class="lw-footer-brand">
+        <div class="lw-footer-logo">
+          <svg width="56" height="28" viewBox="0 0 72 36" fill="none" aria-hidden="true">
+            <line x1="4" y1="28" x2="68" y2="28" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></line>
+            <path d="M8 28 Q36 2 64 28" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path>
+            <line x1="22" y1="18.3" x2="22" y2="28" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"></line>
+            <line x1="29" y1="15.8" x2="29" y2="28" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"></line>
+            <line x1="36" y1="15" x2="36" y2="28" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"></line>
+            <line x1="43" y1="15.8" x2="43" y2="28" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"></line>
+            <line x1="50" y1="18.3" x2="50" y2="28" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"></line>
+          </svg>
+          <span>LAWBRIDGE</span>
+        </div>
+        <span class="lw-footer-tag">Connecting people. Resolving matters. Building trust.</span>
+      </div>
+      <nav class="lw-footer-links" aria-label="Mapa del sitio">
+        <a href="#servicios">Servicios</a>
+        <a href="#metodo">Método</a>
+        <a href="#despacho">La firma</a>
+        <a href="#colaboracion">Colaboración</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+    <div class="lw-footer-bottom">
+      <span>© 2026 Lawbridge · Firma de abogados · Santo Domingo, R.D.</span>
+      <span>Aviso legal · Privacidad</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Nav: fondo al hacer scroll
+  var nav = document.getElementById('lwNav');
+  function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Aparición al hacer scroll
+  if ('IntersectionObserver' in window) {
+    var revealTargets = document.querySelectorAll('#servicios .lw-container, #metodo .lw-container, #despacho .lw-container, #colaboracion .lw-container, #faq .lw-container, #contacto .lw-container');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    revealTargets.forEach(function (el) { el.classList.add('lw-reveal'); io.observe(el); });
+  }
+
+  // Servicios: detalle
+  var SVC = {
+    societario: { title: 'Vida societaria', bullets: ['Constitución de sociedades (SRL, SAS, EIRL)', 'Convocatorias y actas de asambleas y consejos', 'Libros corporativos y Registro Mercantil al día', 'Modificaciones estatutarias y poderes'] },
+    contratos: { title: 'Contratación mercantil', bullets: ['Redacción y revisión de contratos mercantiles', 'Acuerdos de confidencialidad (NDA)', 'Condiciones generales de contratación', 'Acuerdos de distribución, agencia y servicios'] },
+    compliance: { title: 'Compliance y datos', bullets: ['Cumplimiento de la Ley 172-13 de protección de datos', 'Prevención de lavado de activos (Ley 155-17)', 'Políticas internas y códigos de ética', 'Capacitación de equipos en cumplimiento'] },
+    tramites: { title: 'Trámites y licencias', bullets: ['Permisos y licencias municipales y sectoriales', 'Registro Mercantil, ONAPI y Pro Consumidor', 'RNC y gestiones ante la DGII', 'Reconsideraciones y recursos administrativos'] },
+    laboral: { title: 'Asesoría laboral corporativa', bullets: ['Contratos conforme al Código de Trabajo', 'Reglamentos internos y teletrabajo', 'Registro de contratos ante el Ministerio de Trabajo (SIRLA)', 'Acompañamiento en inspecciones laborales'] },
+    extrajudicial: { title: 'Resolución extrajudicial', bullets: ['Negociación directa con la otra parte', 'Mediación y acuerdos transaccionales', 'Puestas en mora e intimaciones de pago', 'Derivación a litigantes de confianza si es inevitable'] }
+  };
+  var ARC = '<svg width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="M1 8 Q7 -2 13 8" stroke="#0D9488" stroke-width="1.6" stroke-linecap="round" fill="none"></path></svg>';
+  var detail = document.getElementById('svcDetail');
+  var svcTitle = document.getElementById('svcTitle');
+  var svcBullets = document.getElementById('svcBullets');
+  function renderSvc(key) {
+    var s = SVC[key];
+    svcTitle.textContent = s.title;
+    svcBullets.innerHTML = s.bullets.map(function (b) {
+      return '<li>' + ARC + '<span></span></li>';
+    }).join('');
+    var spans = svcBullets.querySelectorAll('li > span');
+    s.bullets.forEach(function (b, i) { spans[i].textContent = b; });
+    detail.classList.remove('fade');
+    void detail.offsetWidth;
+    detail.classList.add('fade');
+  }
+  document.querySelectorAll('.lw-svc-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      document.querySelectorAll('.lw-svc-card').forEach(function (c) {
+        c.classList.remove('sel');
+        c.querySelector('.m').textContent = 'Ver detalle →';
+      });
+      card.classList.add('sel');
+      card.querySelector('.m').textContent = 'Seleccionado';
+      renderSvc(card.getAttribute('data-svc'));
+    });
+  });
+  renderSvc('societario');
+  document.querySelector('.lw-svc-card.sel .m').textContent = 'Seleccionado';
+
+  // Método: pasos
+  var STEPS = [
+    { title: 'Diagnóstico', text: 'Una primera conversación de 30 minutos, sin compromiso, para entender su empresa y el asunto. Salimos de ella con un mapa claro de qué hay que hacer.' },
+    { title: 'Propuesta cerrada', text: 'Alcance, plazos y honorarios fijados por escrito antes de empezar. Sin tarifas por hora abiertas ni partidas imprevistas.' },
+    { title: 'Ejecución', text: 'Trabajo directo con quien le atiende — sin intermediarios. Documentos en lenguaje claro y avances comunicados cada semana.' },
+    { title: 'Seguimiento', text: 'Cerrado el asunto, queda el puente: calendario de obligaciones, recordatorios de plazos y disponibilidad para la siguiente duda.' }
+  ];
+  var stepBody = document.getElementById('stepBody');
+  var stepTitle = document.getElementById('stepTitle');
+  var stepText = document.getElementById('stepText');
+  document.querySelectorAll('.lw-step-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.lw-step-tab').forEach(function (t) { t.classList.remove('on'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('on');
+      tab.setAttribute('aria-selected', 'true');
+      var s = STEPS[parseInt(tab.getAttribute('data-step'), 10)];
+      stepTitle.textContent = s.title;
+      stepText.textContent = s.text;
+      stepBody.classList.remove('fade');
+      void stepBody.offsetWidth;
+      stepBody.classList.add('fade');
+    });
+  });
+
+  // Formulario
+  var form = document.getElementById('lwForm');
+  var card = document.getElementById('formCard');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nombre = form.nombre.value.trim();
+    var empresa = form.empresa.value.trim();
+    var email = form.email.value.trim();
+    var mensaje = form.mensaje.value.trim();
+    var ok = true;
+    function mark(id, bad) {
+      var f = document.getElementById(id);
+      f.classList.toggle('bad', bad);
+      f.querySelector('input,textarea').classList.toggle('err', bad);
+      if (bad) ok = false;
+    }
+    mark('f-nombre', !nombre);
+    mark('f-empresa', !empresa);
+    mark('f-email', !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    mark('f-mensaje', mensaje.length < 10);
+    if (ok) {
+      document.getElementById('okText').textContent = 'Gracias, ' + nombre.split(' ')[0] + '. Le escribiremos a ' + email + ' en menos de un día laborable para agendar la consulta.';
+      card.classList.add('sent');
+    }
+  });
+})();
+</script>
+</body>
+</html>
