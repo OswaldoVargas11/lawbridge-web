@@ -7,6 +7,14 @@
 <title>Calculadora de prestaciones laborales (RD) — Lawbridge</title>
 <meta name="description" content="Calcula un estimado de tus prestaciones laborales en República Dominicana: preaviso, cesantía, vacaciones y salario de navidad según el Código de Trabajo.">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="canonical" href="https://oswaldovargas11.github.io/lawbridge-web/herramientas/prestaciones.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_DO">
+<meta property="og:title" content="Calculadora de prestaciones laborales (RD) — Lawbridge">
+<meta property="og:description" content="Calcula un estimado de tus prestaciones laborales en República Dominicana: preaviso, cesantía, vacaciones y salario de navidad.">
+<meta property="og:image" content="https://oswaldovargas11.github.io/lawbridge-web/og-image.png">
+<meta property="og:url" content="https://oswaldovargas11.github.io/lawbridge-web/herramientas/prestaciones.html">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
@@ -154,11 +162,17 @@
   }
 
   function cesantiaDias(months) {
+    // Art. 80 del Código de Trabajo: escala por AÑO cumplido.
+    // 3–6 meses: 6 días · 6–12 meses: 13 días · 1 año en adelante:
+    // 21 días por cada año (de 1 a 5 años) o 23 días por cada año
+    // (a partir de los 5 años). Las fracciones de año no generan
+    // cesantía adicional, por eso se usan años COMPLETOS (Math.floor).
     if (months < 3) return 0;
     if (months < 6) return 6;
     if (months < 12) return 13;
-    var years = months / 12;
-    return (years <= 5 ? 21 : 23) * years;
+    var years = Math.floor(months / 12);
+    var tasa = years > 5 ? 23 : 21;
+    return tasa * years;
   }
 
   function vacacionesDias(months) {
@@ -245,5 +259,6 @@
   });
 })();
 </script>
+<script src="../cookies-analytics.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /legal/
+
+Sitemap: https://oswaldovargas11.github.io/lawbridge-web/sitemap.xml

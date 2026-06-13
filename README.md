@@ -7,19 +7,33 @@ en GitHub Pages, Netlify, Vercel o cualquier hosting estático.
 ## Estructura
 
 ```
-index.html            ← la página (todo el HTML, CSS y JS van aquí)
-favicon.svg           ← ícono "LB"
-og-image.png          ← imagen para compartir en redes (Open Graph)
-image-slot.js         ← componente para arrastrar la foto en "Sobre mí"
+index.html             ← la página principal (HTML, CSS y JS)
+favicon.svg            ← ícono "LB"
+og-image.png           ← imagen para compartir en redes (Open Graph)
+image-slot.js          ← componente para arrastrar la foto en "Sobre mí"
+cookies-analytics.js   ← aviso de cookies + Google Analytics con consentimiento
+sitemap.xml            ← mapa del sitio para Google
+robots.txt             ← directivas para buscadores
+areas/
+  index.html           ← áreas de práctica en detalle (una sección por área)
 blog/
-  index.html          ← índice del blog (filtro por categoría + tiempo de lectura)
-  *.html              ← artículos individuales
+  index.html           ← índice del blog (filtro por categoría + tiempo de lectura)
+  *.html               ← artículos individuales (con Open Graph y Article schema)
 herramientas/
-  prestaciones.html   ← calculadora de prestaciones laborales (Código de Trabajo RD)
+  prestaciones.html              ← calculadora de prestaciones laborales (Código de Trabajo RD)
+  transferencia-inmobiliaria.html ← calculadora del impuesto de transferencia (3% DGII)
 legal/
-  privacidad.html     ← Política de Privacidad (Ley 172-13)
-  terminos.html       ← Términos de Uso
+  privacidad.html      ← Política de Privacidad (Ley 172-13)
+  terminos.html        ← Términos de Uso
 ```
+
+> **Google Analytics:** abre `cookies-analytics.js` y reemplaza `GA_ID` (`G-XXXXXXXXXX`)
+> por tu ID de medición real de GA4. La analítica **solo se carga si el visitante acepta**
+> el aviso de cookies (cumplimiento Ley 172-13). Sin ID configurado, no se carga nada.
+
+> **Al migrar al dominio propio** (`lawbridge.do`): reemplaza la URL base
+> `https://oswaldovargas11.github.io/lawbridge-web` por `https://lawbridge.do` en las
+> etiquetas `canonical`, `og:*`, el JSON-LD, `sitemap.xml` y `robots.txt`.
 
 > **Blog como subdominio:** cuando tengas dominio propio (`lawbridge.do`), el blog puede
 > servirse como `blog.lawbridge.do` creando un repo aparte con la carpeta `blog/` y un

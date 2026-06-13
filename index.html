@@ -7,12 +7,14 @@
 <title>Lawbridge — Despacho de Abogados en Santo Domingo</title>
 <meta name="description" content="Despacho boutique de abogados en Santo Domingo, República Dominicana. Civil, inmobiliario, laboral y corporativo. Connecting people. Resolving matters. Building trust.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<!-- Open Graph — replace og-image.png with an absolute URL before publishing -->
+<link rel="canonical" href="https://oswaldovargas11.github.io/lawbridge-web/">
+<!-- Open Graph — al migrar al dominio propio, reemplaza la URL base por https://lawbridge.do -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_DO">
 <meta property="og:title" content="Lawbridge — Despacho de Abogados en Santo Domingo">
 <meta property="og:description" content="Del problema a la solución, construimos el puente. Asesoría legal en República Dominicana: civil, inmobiliario, laboral y corporativo.">
-<meta property="og:image" content="og-image.png">
+<meta property="og:image" content="https://oswaldovargas11.github.io/lawbridge-web/og-image.png">
+<meta property="og:url" content="https://oswaldovargas11.github.io/lawbridge-web/">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {
@@ -21,11 +23,15 @@
   "name": "Lawbridge | Despacho de Abogados",
   "slogan": "Connecting people. Resolving matters. Building trust.",
   "description": "Despacho boutique de abogados en Santo Domingo, República Dominicana. Derecho civil, inmobiliario, laboral, corporativo y resolución de conflictos.",
-  "url": "https://www.lawbridge.do",
+  "url": "https://oswaldovargas11.github.io/lawbridge-web/",
   "telephone": "+1-809-555-0123",
   "email": "hola@lawbridge.do",
-  "image": "og-image.png",
+  "image": "https://oswaldovargas11.github.io/lawbridge-web/og-image.png",
   "priceRange": "$$",
+  "contactPoint": [
+    { "@type": "ContactPoint", "telephone": "+1-809-555-0123", "contactType": "customer service", "areaServed": "DO", "availableLanguage": ["Spanish","English"] },
+    { "@type": "ContactPoint", "telephone": "+1-829-555-0123", "contactType": "customer service", "contactOption": "TollFree" }
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Av. Winston Churchill 1099, Torre Acrópolis, Piso 10, Piantini",
@@ -39,6 +45,19 @@
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:30", "closes": "17:30" },
     { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "12:00" }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "¿La primera consulta tiene costo?", "acceptedAnswer": { "@type": "Answer", "text": "La consulta de orientación inicial (30 minutos) tiene una tarifa fija que se informa al agendar. Si decides contratar el servicio, ese monto se acredita a los honorarios del caso." } },
+    { "@type": "Question", "name": "¿Atiendes consultas virtuales?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Puedes agendar por videollamada o presencial en el despacho en Piantini. Muchos clientes en el interior y en el exterior llevan todo su caso de forma remota." } },
+    { "@type": "Question", "name": "¿Qué documentos debo llevar a la primera reunión?", "acceptedAnswer": { "@type": "Answer", "text": "Tu cédula o pasaporte y cualquier documento relacionado con el asunto: contratos, títulos, comunicaciones, actos de alguacil. Si no tienes todo, en la consulta definimos qué falta y cómo obtenerlo." } },
+    { "@type": "Question", "name": "¿Cómo se calculan los honorarios?", "acceptedAnswer": { "@type": "Answer", "text": "Tras la consulta inicial recibes una propuesta por escrito con honorarios cerrados o por etapas, según el tipo de asunto. Nunca empezamos a trabajar sin que apruebes el presupuesto." } },
+    { "@type": "Question", "name": "¿Cuánto puede tardar mi caso?", "acceptedAnswer": { "@type": "Answer", "text": "Depende del asunto y de la vía elegida: un acuerdo puede cerrarse en semanas; un proceso judicial o de registro de título toma meses. En el plan de trabajo recibirás plazos estimados realistas para cada etapa." } }
   ]
 }
 </script>
@@ -230,12 +249,16 @@
   .area-card {
     background: #FFFFFF; border: 1.5px solid rgba(34,62,91,0.08); border-radius: 14px;
     padding: 28px 26px 24px; display: flex; flex-direction: column; gap: 10px;
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    transition: transform 0.18s ease, box-shadow 0.18s ease; text-decoration: none;
   }
   .area-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(34,62,91,0.1); }
+  .area-card:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
   .area-card svg { margin-bottom: 6px; }
   .area-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 17px; color: var(--deep); margin: 0; }
   .area-card p { font-size: 15px; line-height: 1.6; color: var(--gray); margin: 0; text-wrap: pretty; }
+  .area-more { margin-top: auto; padding-top: 8px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.04em; color: var(--teal); opacity: 0; transform: translateX(-4px); transition: opacity 0.18s ease, transform 0.18s ease; }
+  .area-card:hover .area-more, .area-card:focus-visible .area-more { opacity: 1; transform: none; }
+  .areas-more { margin-top: 28px; }
 
   /* método */
   .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; position: relative; }
@@ -251,6 +274,34 @@
   }
   .step h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 18px; color: var(--deep); margin: 6px 0 0; }
   .step p { font-size: 15.5px; line-height: 1.65; color: var(--gray); margin: 0; text-wrap: pretty; }
+
+  /* accesibilidad */
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  /* newsletter */
+  .news-sec { background: var(--ice); }
+  .news { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .news-h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(24px, 2.8vw, 32px); color: var(--deep); margin: 0 0 12px; letter-spacing: -0.01em; }
+  .news-p { font-size: 16px; line-height: 1.65; color: var(--mid); margin: 0; max-width: 480px; }
+  .news-row { display: flex; gap: 10px; }
+  .news-row input { flex: 1; font-family: 'Source Sans 3', sans-serif; font-size: 15px; color: var(--deep); background: #FFFFFF; border: 1.5px solid #DCE5EA; border-radius: 8px; padding: 13px 16px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+  .news-row input:focus { border-color: var(--mid); box-shadow: 0 0 0 3px rgba(61,95,122,0.12); }
+  .news-row input.err { border-color: #C2554F; }
+  .news-row .btn { white-space: nowrap; }
+  .news-consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 13px; line-height: 1.5; color: var(--gray); cursor: pointer; }
+  .news-consent input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--teal); flex-shrink: 0; }
+  .news-consent a { color: var(--teal); }
+  .news-err { display: block; font-style: normal; font-size: 12.5px; color: #C2554F; margin-top: 10px; }
+  .news-ok { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 16px; color: var(--teal); margin: 0; }
+
+  /* reseñas (provisional) */
+  .reviews-slot {
+    margin-top: 44px; border: 2px dashed rgba(34,62,91,0.22); border-radius: 16px;
+    padding: 44px 30px; display: flex; flex-direction: column; align-items: center; gap: 16px;
+    text-align: center; background: repeating-linear-gradient(45deg, #F6F9FB 0 14px, #EEF4F7 14px 28px);
+  }
+  .reviews-slot p { font-size: 15.5px; line-height: 1.6; color: var(--mid); margin: 0; max-width: 460px; }
+  .reviews-slot .btn { margin-top: 6px; }
 
   /* blog */
   .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
@@ -275,6 +326,14 @@
   .tool-strip .kicker { color: #2DD4BF; margin-bottom: 10px; }
   .tool-strip h2 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: clamp(22px, 2.6vw, 30px); color: #FFFFFF; margin: 0 0 10px; letter-spacing: -0.01em; }
   .tool-strip p { font-size: 16px; line-height: 1.6; color: rgba(230,238,241,0.75); margin: 0; max-width: 560px; }
+  .tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 40px; }
+  .tool-card { display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 26px; text-decoration: none; transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease; }
+  .tool-card:hover { transform: translateY(-3px); border-color: rgba(45,212,191,0.6); background: rgba(255,255,255,0.08); }
+  .tool-card:focus-visible { outline: 3px solid #2DD4BF; outline-offset: 2px; }
+  .tool-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 17px; color: #FFFFFF; margin: 0; }
+  .tool-card p { font-size: 14.5px; line-height: 1.55; color: rgba(230,238,241,0.7); margin: 0; max-width: none; }
+  .tool-go { margin-top: auto; padding-top: 8px; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12.5px; letter-spacing: 0.04em; color: #2DD4BF; }
+  @media (max-width: 720px) { .tool-grid { grid-template-columns: 1fr; } }
 
   /* FAQ */
   .faq-sec { background: var(--ice); }
@@ -387,6 +446,7 @@
     .agenda-grid { grid-template-columns: 1fr; }
     .embed-slot { min-height: 380px; }
     .contact { grid-template-columns: 1fr; gap: 48px; }
+    .news { grid-template-columns: 1fr; gap: 28px; }
   }
   @media (max-width: 720px) {
     :root { --hero-len: 2.8; }
@@ -396,6 +456,30 @@
     .hg-sm, .water-sm { display: none; }
     .bridge-wrap { height: 52vh; height: 52svh; }
     .form-card { padding: 26px 22px; }
+    .news-row { flex-direction: column; }
+    .news-row .btn { width: 100%; }
+  }
+
+  /* ============ BARRA DE ACCIÓN MÓVIL ============ */
+  .mobile-bar { display: none; }
+  @media (max-width: 720px) {
+    .mobile-bar {
+      display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 95;
+      background: rgba(255,255,255,0.97); backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(34,62,91,0.12); box-shadow: 0 -4px 18px rgba(10,22,36,0.1);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+    }
+    .mobile-bar a {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+      text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 600;
+      font-size: 10.5px; letter-spacing: 0.03em; color: var(--mid); padding: 6px 4px; border-radius: 8px;
+    }
+    .mobile-bar a.primary { color: #FFFFFF; background: var(--teal); margin: 0 2px; }
+    .mobile-bar a svg { width: 20px; height: 20px; }
+    .mobile-bar a:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+    /* el WhatsApp flotante y el hint se ocultan: sus acciones viven en la barra */
+    .wa-float { display: none; }
+    body { padding-bottom: 64px; }
   }
   /* movimiento reducido: puente terminado, hero de una pantalla */
   @media (prefers-reduced-motion: reduce) {
@@ -556,36 +640,45 @@
     <h2 class="h2 rv d1">Donde construimos puentes.</h2>
     <p class="lead rv d2">Asesoría integral para personas y empresas en República Dominicana.</p>
     <div class="area-grid">
-      <article class="area-card rv">
+      <a class="area-card rv" href="areas/index.html#civil">
         <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M2 13 Q13 -4 24 13" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
         <h3>Civil y contratos</h3>
         <p>Obligaciones y contratos, responsabilidad civil, cobro de créditos y asesoría preventiva.</p>
-      </article>
-      <article class="area-card rv d1">
+        <span class="area-more">Ver más →</span>
+      </a>
+      <a class="area-card rv d1" href="areas/index.html#inmobiliario">
         <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M2 13 Q13 -4 24 13" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
         <h3>Inmobiliario y títulos</h3>
         <p>Compraventas, deslindes, saneamiento de títulos, due diligence y jurisdicción inmobiliaria.</p>
-      </article>
-      <article class="area-card rv d2">
+        <span class="area-more">Ver más →</span>
+      </a>
+      <a class="area-card rv d2" href="areas/index.html#corporativo">
         <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M2 13 Q13 -4 24 13" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
         <h3>Corporativo y societario</h3>
         <p>Constitución de sociedades, pactos de socios, contratación mercantil y cumplimiento.</p>
-      </article>
-      <article class="area-card rv d3">
+        <span class="area-more">Ver más →</span>
+      </a>
+      <a class="area-card rv d3" href="areas/index.html#laboral">
         <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M2 13 Q13 -4 24 13" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
         <h3>Laboral</h3>
         <p>Contratación, prestaciones, desahucio y representación ante el Ministerio de Trabajo.</p>
-      </article>
-      <article class="area-card rv d4">
+        <span class="area-more">Ver más →</span>
+      </a>
+      <a class="area-card rv d4" href="areas/index.html#familia">
         <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M2 13 Q13 -4 24 13" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
         <h3>Familia y sucesiones</h3>
         <p>Divorcios, particiones, determinación de herederos y planificación sucesoral.</p>
-      </article>
-      <article class="area-card rv d5">
+        <span class="area-more">Ver más →</span>
+      </a>
+      <a class="area-card rv d5" href="areas/index.html#mediacion">
         <svg width="26" height="14" viewBox="0 0 26 14" aria-hidden="true"><path d="M2 13 Q13 -4 24 13" stroke="#0D9488" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
         <h3>Mediación y litigios</h3>
         <p>Resolución de conflictos: primero el acuerdo; si no es posible, defensa procesal sólida.</p>
-      </article>
+        <span class="area-more">Ver más →</span>
+      </a>
+    </div>
+    <div class="areas-more rv">
+      <a class="btn btn-ghost" href="areas/index.html">Ver todas las áreas en detalle</a>
     </div>
   </div>
 </section>
@@ -616,15 +709,46 @@
   </div>
 </section>
 
+<!-- ============ RESEÑAS (provisional) ============ -->
+<!--
+  PROVISIONAL: la firma aún no tiene perfil de Google Business, así que esta
+  sección muestra un marcador. Cuando el perfil exista y tenga reseñas:
+  1) Crea el Perfil de Empresa en Google y consigue reseñas reales.
+  2) Sustituye el bloque .reviews-slot por un widget de reseñas (p. ej.
+     Elfsight, Trustindex o la Google Places API) y actualiza el enlace
+     "Déjanos tu reseña" con tu enlace corto de Google (g.page/...).
+-->
+<section class="reviews-sec" id="resenas">
+  <div class="container">
+    <span class="kicker rv">Reseñas</span>
+    <h2 class="h2 rv d1">Lo que dicen nuestros clientes.</h2>
+    <p class="lead rv d2">Las reseñas verificadas de Google aparecerán aquí cuando el perfil de la firma esté activo.</p>
+    <div class="reviews-slot rv" role="note" aria-label="Espacio reservado para reseñas de Google">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7L12 2z" stroke="#0D9488" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <p><strong>Reseñas de Google — próximamente.</strong><br>Estamos reuniendo las primeras opiniones de clientes. Aquí se mostrarán las reseñas verificadas con su calificación.</p>
+      <a class="btn btn-ghost btn-sm" href="#agenda">Sé de los primeros — agenda tu consulta</a>
+    </div>
+  </div>
+</section>
+
 <!-- ============ HERRAMIENTAS ============ -->
 <section class="tool-strip" id="herramientas">
-  <div class="container tool-inner">
-    <div class="rv">
-      <span class="kicker">Herramientas gratuitas</span>
-      <h2>Calcula tus prestaciones laborales.</h2>
-      <p>Preaviso, cesantía, vacaciones y salario de navidad según el Código de Trabajo dominicano. Estimado al instante, sin registrarte y sin enviar tus datos.</p>
+  <div class="container">
+    <span class="kicker rv">Herramientas gratuitas</span>
+    <h2 class="rv d1">Calcula antes de decidir.</h2>
+    <p class="rv d2">Estimaciones al instante, sin registrarte y sin enviar tus datos — todo se calcula en tu navegador.</p>
+    <div class="tool-grid">
+      <a class="tool-card rv d1" href="herramientas/prestaciones.html">
+        <h3>Calculadora de prestaciones laborales</h3>
+        <p>Preaviso, cesantía, vacaciones y salario de navidad según el Código de Trabajo dominicano.</p>
+        <span class="tool-go">Abrir calculadora →</span>
+      </a>
+      <a class="tool-card rv d2" href="herramientas/transferencia-inmobiliaria.html">
+        <h3>Impuesto de transferencia inmobiliaria</h3>
+        <p>Estima el 3 % de transferencia (DGII) y el costo total de registrar tu inmueble en RD.</p>
+        <span class="tool-go">Abrir calculadora →</span>
+      </a>
     </div>
-    <a class="btn btn-primary rv d1" href="herramientas/prestaciones.html">Abrir calculadora</a>
   </div>
 </section>
 
@@ -657,6 +781,30 @@
     <div class="blog-more rv">
       <a class="btn btn-ghost" href="blog/index.html">Visitar el blog — todos los artículos</a>
     </div>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER / CAPTACIÓN ============ -->
+<section class="news-sec" id="newsletter">
+  <div class="container news">
+    <div class="rv">
+      <span class="kicker">Novedades jurídicas</span>
+      <h2 class="news-h2">Recibe nuestras guías legales.</h2>
+      <p class="news-p">Suscríbete y te enviamos, sin spam, nuestras guías prácticas y las novedades legales de República Dominicana que afectan a personas y empresas. Cancela cuando quieras.</p>
+    </div>
+    <form class="news-form rv d1" id="newsForm" novalidate>
+      <input type="text" name="_gotcha" id="n-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
+      <div class="news-row">
+        <label class="sr-only" for="n-email">Tu email</label>
+        <input id="n-email" name="email" type="email" autocomplete="email" maxlength="150" placeholder="tu@email.com" required>
+        <button class="btn btn-primary" type="submit">Suscribirme</button>
+      </div>
+      <label class="news-consent" for="n-consent">
+        <input id="n-consent" name="consentimiento" type="checkbox" required>
+        <span>Acepto recibir comunicaciones y la <a href="legal/privacidad.html">Política de Privacidad</a> (Ley 172-13).</span>
+      </label>
+      <em id="n-err" class="news-err" hidden>Escribe un email válido y acepta la política.</em>
+    </form>
   </div>
 </section>
 
@@ -813,10 +961,11 @@
         <span class="foot-word">Lawbridge</span>
       </div>
       <nav class="foot-links" aria-label="Legal">
+        <a href="areas/index.html">Áreas de práctica</a>
+        <a href="blog/index.html">Blog</a>
+        <a href="herramientas/prestaciones.html">Herramientas</a>
         <a href="legal/privacidad.html">Política de Privacidad</a>
         <a href="legal/terminos.html">Términos de Uso</a>
-        <a href="blog/index.html">Blog</a>
-        <a href="herramientas/prestaciones.html">Calculadora de prestaciones</a>
         <a href="#contacto">Contacto</a>
       </nav>
     </div>
@@ -834,6 +983,22 @@
   </svg>
   <span>WhatsApp</span>
 </a>
+
+<!-- ============ BARRA DE ACCIÓN MÓVIL (solo móvil) ============ -->
+<nav class="mobile-bar" aria-label="Acciones rápidas">
+  <a href="tel:+18095550123" aria-label="Llamar al despacho">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 005 5L14 13l5 2v3a2 2 0 01-2 2A15 15 0 013 6a2 2 0 012-2z" stroke="#3D5F7A" stroke-width="1.7" stroke-linejoin="round"/></svg>
+    Llamar
+  </a>
+  <a href="https://wa.me/18295550123" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="11.5" r="8" stroke="#3D5F7A" stroke-width="1.7"/><path d="M6.5 18.5L5 22l3.7-1.3" stroke="#3D5F7A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    WhatsApp
+  </a>
+  <a class="primary" href="#agenda" aria-label="Agenda tu consulta">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" stroke="#FFFFFF" stroke-width="1.7"/><path d="M3.5 9.5h17M8 3.5v3M16 3.5v3" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/></svg>
+    Agenda
+  </a>
+</nav>
 
 <script src="image-slot.js"></script>
 <script>
@@ -1070,7 +1235,42 @@
       document.body.appendChild(s);
     }
   }
+
+  /* ---------- newsletter (Web3Forms) ---------- */
+  var newsForm = $('newsForm');
+  if (newsForm) {
+    newsForm.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var email = $('n-email'), consent = $('n-consent'), err = $('n-err');
+      var okMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+      var okConsent = consent.checked;
+      email.classList.toggle('err', !okMail);
+      err.hidden = okMail && okConsent;
+      if (!okMail || !okConsent) return;
+      if ($('n-gotcha') && $('n-gotcha').value) { newsDone(); return; }
+
+      if (!WEB3FORMS_KEY || WEB3FORMS_KEY.indexOf('TU-ACCESS-KEY') === 0) { newsDone(); return; }
+      var btn = newsForm.querySelector('button[type="submit"]');
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: 'Nueva suscripción — Newsletter Lawbridge',
+          from_name: 'Lawbridge — Newsletter',
+          email: email.value.trim()
+        })
+      }).then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.success) newsDone(); else { btn.disabled = false; btn.textContent = 'Suscribirme'; err.textContent = 'No pudimos completar la suscripción. Inténtalo de nuevo.'; err.hidden = false; } })
+        .catch(function () { btn.disabled = false; btn.textContent = 'Suscribirme'; err.textContent = 'No pudimos completar la suscripción. Inténtalo de nuevo.'; err.hidden = false; });
+    });
+    function newsDone() {
+      newsForm.innerHTML = '<p class="news-ok" role="status">¡Gracias por suscribirte! Pronto recibirás nuestras guías y novedades.</p>';
+    }
+  }
 })();
 </script>
+<script src="cookies-analytics.js" defer></script>
 </body>
 </html>
