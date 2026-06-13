@@ -789,8 +789,8 @@
   <div class="container news">
     <div class="rv">
       <span class="kicker">Novedades jurídicas</span>
-      <h2 class="news-h2">Recibe nuestras guías legales.</h2>
-      <p class="news-p">Suscríbete y te enviamos, sin spam, nuestras guías prácticas y las novedades legales de República Dominicana que afectan a personas y empresas. Cancela cuando quieras.</p>
+      <h2 class="news-h2">Descarga gratis nuestra guía.</h2>
+      <p class="news-p">Suscríbete y recibe al instante la guía <strong>«Los 5 documentos que debes revisar antes de comprar un inmueble en RD»</strong>, además de nuestras novedades legales. Sin spam; cancela cuando quieras.</p>
     </div>
     <form class="news-form rv d1" id="newsForm" novalidate>
       <input type="text" name="_gotcha" id="n-gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; opacity:0;">
@@ -1266,7 +1266,8 @@
         .catch(function () { btn.disabled = false; btn.textContent = 'Suscribirme'; err.textContent = 'No pudimos completar la suscripción. Inténtalo de nuevo.'; err.hidden = false; });
     });
     function newsDone() {
-      newsForm.innerHTML = '<p class="news-ok" role="status">¡Gracias por suscribirte! Pronto recibirás nuestras guías y novedades.</p>';
+      newsForm.innerHTML = '<p class="news-ok" role="status">¡Gracias por suscribirte! Aquí tienes tu guía:</p>' +
+        '<a class="btn btn-primary" href="guias/guia-comprar-inmueble-rd.pdf" target="_blank" rel="noopener" download style="margin-top:14px;">Descargar la guía (PDF)</a>';
     }
   }
 })();
