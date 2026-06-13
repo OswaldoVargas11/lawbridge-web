@@ -10,7 +10,7 @@
    instalan cookies de Google. La decisión se guarda en localStorage.
    ============================================================ */
 (function () {
-  var GA_ID = 'G-XXXXXXXXXX';                 // ← reemplazar por tu ID real de GA4
+  var GA_ID = 'G-Y751SEZ3KG';                 // ← ID de medición GA4 de Lawbridge
   var KEY = 'lb-cookie-consent';              // 'accepted' | 'rejected'
 
   // Ruta a la política de privacidad según la profundidad de la página
